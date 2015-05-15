@@ -39,9 +39,6 @@
 - (IBAction)tableViewEdit:(id)sender {
     if ([_RightItem.title isEqual:@"Edit"]) {
         self.tableView.editing =YES;
-        self.tableView.allowsSelectionDuringEditing = YES;
-        self.tableView.allowsMultipleSelection=YES;
-        self.tableView.allowsMultipleSelectionDuringEditing=YES;
         _RightItem.title = @"确定";
     }else {
         /// 删除数据
@@ -70,24 +67,54 @@
     return cell;
 }
 
+// UITableViewCellEditingStyleDelete 删除-----UITableViewCellEditingStyleInsert 插入
+// 二者都存在的时候显示多选的圆圈
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return
-    UITableViewCellEditingStyleDelete
-    |
-    UITableViewCellEditingStyleInsert;
+//    UITableViewCellEditingStyleDelete
+//    |
+    UITableViewCellEditingStyleInsert
+    ;
+}
+
+// 设置删除时右边按钮的title
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除。。。。。。。";
 }
 
 
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-//    [segue initWithIdentifier:@"PresentSystem" source:<#(UIViewController *)#> destination:<#(UIViewController *)#>]
-    
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"shanchu" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        [_datas removeObjectAtIndex:indexPath.row];
+//        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+//    }];
+//    UITableViewRowAction *deleteAction1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"置顶" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+//        if (![firstIndexPath isEqual:indexPath]) {
+//            [_datas exchangeObjectAtIndex:indexPath.row withObjectAtIndex:0];
+//            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:firstIndexPath];
+//        }
+//    }];
+//    return @[deleteAction,deleteAction1];
 //}
+
+// 系统删除按钮的响应
+- (void)tableView:(UITableView *)tableView commitEditingStyle: (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // 数据源也要相应删除一项
+        [_datas removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [_datas addObject:@"100"];
+        NSLog(@"%@",_datas);
+        [_datas exchangeObjectAtIndex:_datas.count-1 withObjectAtIndex:indexPath.row+1];
+        NSLog(@"%@",_datas);
+        NSIndexPath *insetIndexPath = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+        [tableView insertRowsAtIndexPaths:@[insetIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }
+}
+
 
 @end
