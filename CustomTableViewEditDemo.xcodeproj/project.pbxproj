@@ -14,6 +14,11 @@
 		FB37760E1B064ED200E894F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB37760D1B064ED200E894F8 /* Images.xcassets */; };
 		FB3776111B064ED200E894F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB37760F1B064ED200E894F8 /* LaunchScreen.xib */; };
 		FB37761D1B064ED200E894F8 /* CustomTableViewEditDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB37761C1B064ED200E894F8 /* CustomTableViewEditDemoTests.m */; };
+		FB37762E1B064EE900E894F8 /* CollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3776271B064EE900E894F8 /* CollectionTableViewCell.m */; };
+		FB37762F1B064EE900E894F8 /* CollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3776281B064EE900E894F8 /* CollectionTableViewCell.xib */; };
+		FB3776301B064EE900E894F8 /* CollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB37762A1B064EE900E894F8 /* CollectionModel.m */; };
+		FB3776311B064EE900E894F8 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB37762C1B064EE900E894F8 /* CollectViewController.m */; };
+		FB3776321B064EE900E894F8 /* CollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB37762D1B064EE900E894F8 /* CollectViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,14 @@
 		FB3776161B064ED200E894F8 /* CustomTableViewEditDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomTableViewEditDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB37761B1B064ED200E894F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB37761C1B064ED200E894F8 /* CustomTableViewEditDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewEditDemoTests.m; sourceTree = "<group>"; };
+		FB3776261B064EE900E894F8 /* CollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionTableViewCell.h; sourceTree = "<group>"; };
+		FB3776271B064EE900E894F8 /* CollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionTableViewCell.m; sourceTree = "<group>"; };
+		FB3776281B064EE900E894F8 /* CollectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionTableViewCell.xib; sourceTree = "<group>"; };
+		FB3776291B064EE900E894F8 /* CollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionModel.h; sourceTree = "<group>"; };
+		FB37762A1B064EE900E894F8 /* CollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionModel.m; sourceTree = "<group>"; };
+		FB37762B1B064EE900E894F8 /* CollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectViewController.h; sourceTree = "<group>"; };
+		FB37762C1B064EE900E894F8 /* CollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectViewController.m; sourceTree = "<group>"; };
+		FB37762D1B064EE900E894F8 /* CollectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +94,14 @@
 		FB3775FF1B064ED200E894F8 /* CustomTableViewEditDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FB3776261B064EE900E894F8 /* CollectionTableViewCell.h */,
+				FB3776271B064EE900E894F8 /* CollectionTableViewCell.m */,
+				FB3776281B064EE900E894F8 /* CollectionTableViewCell.xib */,
+				FB3776291B064EE900E894F8 /* CollectionModel.h */,
+				FB37762A1B064EE900E894F8 /* CollectionModel.m */,
+				FB37762B1B064EE900E894F8 /* CollectViewController.h */,
+				FB37762C1B064EE900E894F8 /* CollectViewController.m */,
+				FB37762D1B064EE900E894F8 /* CollectViewController.xib */,
 				FB3776041B064ED200E894F8 /* AppDelegate.h */,
 				FB3776051B064ED200E894F8 /* AppDelegate.m */,
 				FB3776071B064ED200E894F8 /* ViewController.h */,
@@ -201,7 +222,9 @@
 			files = (
 				FB37760C1B064ED200E894F8 /* Main.storyboard in Resources */,
 				FB3776111B064ED200E894F8 /* LaunchScreen.xib in Resources */,
+				FB3776321B064EE900E894F8 /* CollectViewController.xib in Resources */,
 				FB37760E1B064ED200E894F8 /* Images.xcassets in Resources */,
+				FB37762F1B064EE900E894F8 /* CollectionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,8 +243,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB3776091B064ED200E894F8 /* ViewController.m in Sources */,
+				FB3776311B064EE900E894F8 /* CollectViewController.m in Sources */,
 				FB3776061B064ED200E894F8 /* AppDelegate.m in Sources */,
+				FB3776301B064EE900E894F8 /* CollectionModel.m in Sources */,
 				FB3776031B064ED200E894F8 /* main.m in Sources */,
+				FB37762E1B064EE900E894F8 /* CollectionTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
