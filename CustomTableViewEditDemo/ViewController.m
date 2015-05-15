@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CollectViewController.h"
+#import "SystemEditViewController.h"
 
 @interface ViewController ()
 
@@ -26,9 +27,22 @@
     
 }
 
+//- (IBAction)presentSystemAction:(id)sender {
+//    SystemEditViewController *systemEditVc = [[SystemEditViewController alloc] init];
+//    UINavigationController *navig = [[UINavigationController alloc] initWithRootViewController:systemEditVc];
+//    [self presentViewController:navig animated:YES completion:nil];
+//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    //    [segue initWithIdentifier:@"PresentSystem" source:<#(UIViewController *)#> destination:<#(UIViewController *)#>]
+    
 }
 
 @end

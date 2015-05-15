@@ -39,8 +39,13 @@ static NSString *collectionTableViewCell = @"CollectionTableViewCell";
         [button addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
         button.tintColor = [UIColor whiteColor];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dismiss" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
     }
     return self;
+}
+
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

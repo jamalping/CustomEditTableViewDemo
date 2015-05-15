@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,21 +17,109 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPm-E4-ikI">
-                                <rect key="frame" x="277" y="257" width="69" height="30"/>
-                                <state key="normal" title="presentVc">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPm-E4-ikI">
+                                <rect key="frame" x="239" y="285" width="123" height="30"/>
+                                <state key="normal" title="presentCustomVc">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="pushAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4im-no-Na1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0N-uB-t2z">
+                                <rect key="frame" x="240" y="391" width="121" height="30"/>
+                                <state key="normal" title="presentSystemVc">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="n4X-FF-SNw" kind="presentation" id="CW1-vS-1xK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="bPm-E4-ikI" secondAttribute="centerY" id="3TN-bz-2ws"/>
+                            <constraint firstAttribute="centerX" secondItem="bPm-E4-ikI" secondAttribute="centerX" id="JuG-3N-16p"/>
+                            <constraint firstItem="p0N-uB-t2z" firstAttribute="top" secondItem="bPm-E4-ikI" secondAttribute="bottom" constant="76" id="WMZ-7e-aZ8"/>
+                            <constraint firstItem="bPm-E4-ikI" firstAttribute="centerX" secondItem="p0N-uB-t2z" secondAttribute="centerX" id="axi-lV-WT5"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="378" y="21"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="P7A-80-24d">
+            <objects>
+                <navigationController id="n4X-FF-SNw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iCC-Tz-kbk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cw6-oB-nsX" kind="relationship" relationship="rootViewController" id="jaL-nL-86I"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bzl-P8-a91" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-237" y="828"/>
+        </scene>
+        <!--System Edit View Controller-->
+        <scene sceneID="TVO-Xi-EZ5">
+            <objects>
+                <viewController id="cw6-oB-nsX" customClass="SystemEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1ho-Xr-q9J"/>
+                        <viewControllerLayoutGuide type="bottom" id="VT1-t6-A7e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s86-TS-Jve">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0NV-jU-ORp">
+                                <rect key="frame" x="16" y="0.0" width="568" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cw6-oB-nsX" id="dPM-H5-bs0"/>
+                                    <outlet property="delegate" destination="cw6-oB-nsX" id="QVd-s1-8au"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="0NV-jU-ORp" secondAttribute="trailing" id="JPy-Ud-qBr"/>
+                            <constraint firstItem="0NV-jU-ORp" firstAttribute="top" secondItem="s86-TS-Jve" secondAttribute="topMargin" id="NFu-eD-15R"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="0NV-jU-ORp" secondAttribute="bottom" id="oOE-bl-dRH"/>
+                            <constraint firstItem="0NV-jU-ORp" firstAttribute="leading" secondItem="s86-TS-Jve" secondAttribute="leadingMargin" id="uqX-KG-7NK"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="dismiss" id="VSk-4Y-wst">
+                            <connections>
+                                <action selector="dismiss:" destination="cw6-oB-nsX" id="etA-e1-wNU"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="fy2-Sl-3zT">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="IYU-o8-z6f">
+                            <connections>
+                                <action selector="tableViewEdit:" destination="cw6-oB-nsX" id="Ave-3S-52F"/>
+                            </connections>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="VSk-4Y-wst" id="eL1-XD-XT1"/>
+                        </connections>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="RightItem" destination="IYU-o8-z6f" id="q4Y-rk-Cjv"/>
+                        <outlet property="tableView" destination="0NV-jU-ORp" id="BDy-9B-E8r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cr3-xn-Wpg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="367" y="765"/>
         </scene>
     </scenes>
 </document>
