@@ -13,7 +13,7 @@
 - (id)initWithDic:(NSDictionary *)dic {
     self = [super init];
     if (self) {
-#warning 待完善。。。
+//#warning 待完善。。。
     }
     return self;
 }

@@ -69,6 +69,7 @@
 
 // UITableViewCellEditingStyleDelete 删除-----UITableViewCellEditingStyleInsert 插入
 // 二者都存在的时候显示多选的圆圈
+// 必须实现的方法
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return
@@ -83,7 +84,7 @@
     return @"删除。。。。。。。";
 }
 
-
+// 自定义编辑时的操作
 //- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"shanchu" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
 //        [_datas removeObjectAtIndex:indexPath.row];

@@ -18,8 +18,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPm-E4-ikI">
-                                <rect key="frame" x="239" y="285" width="123" height="30"/>
-                                <state key="normal" title="presentCustomVc">
+                                <rect key="frame" x="241" y="285" width="120" height="30"/>
+                                <state key="normal" title="自定义编辑的实现">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -27,8 +27,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0N-uB-t2z">
-                                <rect key="frame" x="240" y="391" width="121" height="30"/>
-                                <state key="normal" title="presentSystemVc">
+                                <rect key="frame" x="206" y="391" width="189" height="30"/>
+                                <state key="normal" title="系统的TableView编辑的实现">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -39,7 +39,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="bPm-E4-ikI" secondAttribute="centerY" id="3TN-bz-2ws"/>
-                            <constraint firstAttribute="centerX" secondItem="bPm-E4-ikI" secondAttribute="centerX" id="JuG-3N-16p"/>
+                            <constraint firstAttribute="centerX" secondItem="bPm-E4-ikI" secondAttribute="centerX" constant="-1" id="JuG-3N-16p"/>
                             <constraint firstItem="p0N-uB-t2z" firstAttribute="top" secondItem="bPm-E4-ikI" secondAttribute="bottom" constant="76" id="WMZ-7e-aZ8"/>
                             <constraint firstItem="bPm-E4-ikI" firstAttribute="centerX" secondItem="p0N-uB-t2z" secondAttribute="centerX" id="axi-lV-WT5"/>
                         </constraints>
