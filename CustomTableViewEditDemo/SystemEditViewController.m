@@ -24,8 +24,154 @@
     for (int i = 0; i < 9; i++) {
         [_datas addObject:[NSString stringWithFormat:@"--%d",i]];
     }
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+    [self.tableView addGestureRecognizer:longPress];
 }
 
+// 长按移动表视图
+- (void)longPressAction:(UILongPressGestureRecognizer *)longPress {
+    static UIImageView       *snapshot = nil;        ///< A snapshot of the row user is moving.
+    static NSIndexPath  *sourceIndexPath = nil; ///< Initial index path, where gesture begins.
+    
+    UIGestureRecognizerState state = longPress.state;
+    CGPoint touchPoint = [longPress locationInView:self.tableView];
+    NSIndexPath *touchedIndexPath = [self.tableView indexPathForRowAtPoint:touchPoint];
+    switch (state)
+    {
+        case UIGestureRecognizerStateBegan:
+        {
+            // Check for a valid index path, otherwise cancel the touch
+            if (!touchedIndexPath || [touchedIndexPath section] == NSNotFound || [touchedIndexPath row] == NSNotFound) {
+                longPress.enabled = NO;
+                longPress.enabled = YES;
+                break;
+            }
+            sourceIndexPath = touchedIndexPath;
+            // Get the touched cell and reset it's selection state
+            UITableViewCell *touchedCell = [self.tableView cellForRowAtIndexPath:touchedIndexPath];
+            [touchedCell setSelected:NO];
+            [touchedCell setHighlighted:NO];
+            // Add the snapshot as subview, centered at cell's center...
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            snapshot = [[UIImageView alloc] initWithImage:image];
+            CGRect snapShotFrame = [self.tableView rectForRowAtIndexPath:touchedIndexPath];
+            snapShotFrame.size = touchedCell.bounds.size;
+            [snapshot setFrame:snapShotFrame];
+            [snapshot setAlpha:0.95];
+            
+//            [self.tableView addSubview:snapshot];
+            
+//            snapshot = [self customSnapshotFromView:touchedCell];
+            
+            __block CGPoint center = touchedCell.center;
+            snapshot.center = center;
+            snapshot.alpha = 0.0;
+            [self.tableView addSubview:snapshot];
+            [UIView animateWithDuration:0.25 animations:^{
+                
+                // Offset for gesture location.
+                center.y = touchPoint.y;
+                snapshot.center = center;
+                snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+                snapshot.alpha = 0.98;
+                // Black out.
+                touchedCell.backgroundColor = [UIColor clearColor];
+            } completion:nil];
+        }break;
+            
+        case UIGestureRecognizerStateChanged: {
+            CGPoint center = snapshot.center;
+            center.y = touchPoint.y;
+            snapshot.center = center;
+            
+            // Is destination valid and is it different from source?
+            if (touchedIndexPath && ![touchedIndexPath isEqual:sourceIndexPath]) {
+                
+                // ... update data source.
+                [self.datas exchangeObjectAtIndex:touchedIndexPath.row withObjectAtIndex:sourceIndexPath.row];
+                
+                // ... move the rows.
+                [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:touchedIndexPath];
+                
+                // ... and update source so it is in sync with UI changes. 
+                sourceIndexPath = touchedIndexPath;
+            } 
+        }break;
+         /*
+        case UIGestureRecognizerStateEnded:
+        {
+            [self stopAutoscrolling];
+            
+            // Get to final index path
+            CGRect finalFrame = [self rectForRowAtIndexPath:[self movingIndexPath]];
+            
+            // Place the snap shot to it's final position and fade it out
+            [UIView animateWithDuration:0.2
+                             animations:^{
+                                 
+                                 [[self snapShotImageView] setFrame:finalFrame];
+                                 [[self snapShotImageView] setAlpha:1.0];
+                                 
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                                 if (finished)
+                                 {
+                                     // Clean up snap shot
+                                     [[self snapShotImageView] removeFromSuperview];
+                                     [self setSnapShotImageView:nil];
+                                     
+                                     // Inform the data source about the new position if necessary
+                                     if ([[self initialIndexPathForMovingRow] compare:[self movingIndexPath]] != NSOrderedSame) {
+                                         [[self dataSource] moveTableView:self moveRowFromIndexPath:[self initialIndexPathForMovingRow] toIndexPath:[self movingIndexPath]];
+                                     }
+                                     
+                                     // Reload row at moving index path to reset it's content
+                                     NSIndexPath *movingIndexPath = [self movingIndexPath];
+                                     [self setMovingIndexPath:nil];
+                                     [self setInitialIndexPathForMovingRow:nil];
+                                     [self reloadRowsAtIndexPaths:[NSArray arrayWithObject:movingIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+                                 }
+                                 
+                             }];			
+            
+        }break;
+          */
+
+        default: {
+            // Clean up.
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:sourceIndexPath];
+            [UIView animateWithDuration:0.25 animations:^{
+                
+                snapshot.center = cell.center;
+                snapshot.transform = CGAffineTransformIdentity;
+                snapshot.alpha = 0.0;
+                
+                // Undo the black-out effect we did.
+                cell.backgroundColor = [UIColor whiteColor];
+                
+            } completion:^(BOOL finished) {
+                
+                [snapshot removeFromSuperview]; 
+                snapshot = nil; 
+                
+            }];
+            sourceIndexPath = nil;
+        }break;
+    }
+}
+
+- (UIView *)customSnapshotFromView:(UIView *)inputView {
+    UIView *snapshot = [inputView snapshotViewAfterScreenUpdates:YES];
+    snapshot.layer.masksToBounds = NO;
+    snapshot.layer.cornerRadius = 0.0;
+    snapshot.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
+    snapshot.layer.shadowRadius = 5.0;
+    snapshot.layer.shadowOpacity = 0.4;
+    return snapshot;
+}
 
 #pragma mark - UITableView DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
